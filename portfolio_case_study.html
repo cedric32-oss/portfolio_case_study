@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Case Study - Audit SI Voyagia (Projet Orion)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        lightBg: '#f9fafb',
+                        cardBg: '#ffffff',
+                        cardBorder: '#e5e7eb',
+                        redPrimary: '#dc2626',
+                        redHover: '#b91c1c',
+                        redLight: '#fef2f2',
+                        redBorder: '#fecaca',
+                        darkText: '#111827',
+                        mutedText: '#4b5563',
+                        grayLight: '#f3f4f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            background-color: #f9fafb;
+            color: #111827;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        .gradient-red-text {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-red-hover {
+            transition: all 0.25s ease-in-out;
+        }
+        .card-red-hover:hover {
+            border-color: #fca5a5;
+            box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.1), 0 8px 10px -6px rgba(220, 38, 38, 0.05);
+        }
+        .modal-bg {
+            background-color: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between bg-gray-50 text-gray-900">
+
+    <!-- Header Navigation -->
+    <header class="border-b border-gray-200 bg-white/90 backdrop-blur-md sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-red-50 rounded-xl border border-red-200">
+                    <i data-lucide="layers" class="w-6 h-6 text-red-600"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg text-gray-900 leading-tight">Audit & Post-Mortem SI</h1>
+                    <p class="text-xs text-red-600 font-medium">IMT Business School • Case Study Portfolio</p>
+                </div>
+            </div>
+            <nav class="hidden lg:flex space-x-6 text-sm font-medium text-gray-600">
+                <a href="#metrics" class="hover:text-red-600 transition">Métriques Clés</a>
+                <a href="#bpmn" class="hover:text-red-600 transition">BPMN Métier</a>
+                <a href="#gantt" class="hover:text-red-600 transition">Planning Gantt</a>
+                <a href="#causes" class="hover:text-red-600 transition">Diagnostic</a>
+                <a href="#architecture" class="hover:text-red-600 transition">Architecture</a>
+                <a href="#roadmap" class="hover:text-red-600 transition">Feuille de Route</a>
+            </nav>
+            <div class="flex items-center space-x-2">
+                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-700 border border-red-200">
+                    MOA Consultant
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+
+        <!-- Hero Section -->
+        <section class="text-center space-y-4 max-w-3xl mx-auto">
+            <span class="px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase bg-red-50 text-red-700 border border-red-200 inline-block shadow-sm">
+                PORTFOLIO CASE STUDY • VOYAGIA PROJET ORION
+            </span>
+            <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-gray-900">
+                Analyse Critique de l'Échec de la Refonte SI
+            </h2>
+            <p class="text-gray-600 text-base sm:text-lg leading-relaxed">
+                Analyse post-mortem complète de l'arrêt du Projet Orion après 72h de mise en production.
+                Synthèse des processus métiers BPMN, planning Gantt, causes racines et recommandations d'architecture.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-3 pt-2 text-xs font-medium text-gray-500">
+                <span class="flex items-center gap-1"><i data-lucide="users" class="w-4 h-4 text-red-600"></i> Cedric KOUASSI</span>
+                <span>•</span>
+                <span class="flex items-center gap-1"><i data-lucide="book-open" class="w-4 h-4 text-red-600"></i> Module Conception des SI</span>
+            </div>
+        </section>
+
+        <!-- Metrics Section (Top Grid) -->
+        <section id="metrics" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Metric 1 -->
+            <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm card-red-hover relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-2 h-full bg-red-600"></div>
+                <div class="flex justify-between items-start mb-3">
+                    <span class="text-xs font-bold uppercase text-red-600 tracking-wider">DÉRIVE BUDGÉTAIRE</span>
+                    <div class="p-2 bg-red-50 rounded-lg text-red-600"><i data-lucide="trending-up" class="w-5 h-5"></i></div>
+                </div>
+                <div class="text-4xl font-extrabold text-red-600 mb-1">+200%</div>
+                <div class="text-sm font-bold text-gray-900 mb-1">Dépassement Financier</div>
+                <p class="text-xs text-gray-500">Budget porté à <strong>15 M€</strong> au lieu des 5 M€ initiaux.</p>
+            </div>
+
+            <!-- Metric 2 -->
+            <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm card-red-hover relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-2 h-full bg-red-600"></div>
+                <div class="flex justify-between items-start mb-3">
+                    <span class="text-xs font-bold uppercase text-red-600 tracking-wider">RETARD DE LIVRAISON</span>
+                    <div class="p-2 bg-red-50 rounded-lg text-red-600"><i data-lucide="clock" class="w-5 h-5"></i></div>
+                </div>
+                <div class="text-4xl font-extrabold text-red-600 mb-1">+24 mois</div>
+                <div class="text-sm font-bold text-gray-900 mb-1">Décalage Planning</div>
+                <p class="text-xs text-gray-500">Livraison effective en 42 mois au lieu des 18 mois prévus.</p>
+            </div>
+
+            <!-- Metric 3 -->
+            <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm card-red-hover relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-2 h-full bg-red-600"></div>
+                <div class="flex justify-between items-start mb-3">
+                    <span class="text-xs font-bold uppercase text-red-600 tracking-wider">MANTENAGE PROD</span>
+                    <div class="p-2 bg-red-50 rounded-lg text-red-600"><i data-lucide="alert-octagon" class="w-5 h-5"></i></div>
+                </div>
+                <div class="text-4xl font-extrabold text-red-600 mb-1">72h</div>
+                <div class="text-sm font-bold text-gray-900 mb-1">Temps en Ligne</div>
+                <p class="text-xs text-gray-500">Retrait d'urgence suite aux échecs de réservation et bugs.</p>
+            </div>
+
+            <!-- Metric 4 -->
+            <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm card-red-hover relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-2 h-full bg-red-600"></div>
+                <div class="flex justify-between items-start mb-3">
+                    <span class="text-xs font-bold uppercase text-red-600 tracking-wider">IMPACT MÉTIER</span>
+                    <div class="p-2 bg-red-50 rounded-lg text-red-600"><i data-lucide="arrow-down-right" class="w-5 h-5"></i></div>
+                </div>
+                <div class="text-4xl font-extrabold text-red-600 mb-1">-20%</div>
+                <div class="text-sm font-bold text-gray-900 mb-1">Chute de Chiffre d'Affaires</div>
+                <p class="text-xs text-gray-500">Impact direct sur le CA trimestriel et crise de confiance client.</p>
+            </div>
+        </section>
+
+        <!-- BPMN Diagram Section -->
+        <section id="bpmn" class="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 bg-red-100 text-red-600 rounded-xl">
+                        <i data-lucide="git-branch" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">Cartographie de l'Existant & Processus (BPMN)</h3>
+                        <p class="text-xs text-gray-500">Flux fonctionnel des réservations (Front Office, Back Office, Restaurant / Partenaires)</p>
+                    </div>
+                </div>
+                <button onclick="openModal('bpmn-modal')" class="inline-flex items-center space-x-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition shadow-sm">
+                    <i data-lucide="maximize-2" class="w-4 h-4"></i>
+                    <span>Agrandir le BPMN</span>
+                </button>
+            </div>
+
+            <!-- BPMN Image Visual Container -->
+            <div class="relative bg-gray-50 rounded-xl border border-gray-200 p-4 overflow-hidden group cursor-pointer" onclick="openModal('bpmn-modal')">
+                <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-medium text-gray-700 shadow-sm flex items-center gap-1.5 z-10">
+                    <i data-lucide="zoom-in" class="w-4 h-4 text-red-600"></i> Cliquer pour zoomer
+                </div>
+                <div class="overflow-x-auto">
+                    <!-- Integrated BPMN Visual SVG/Image Mock representing screenshot content -->
+                    <div class="min-w-[900px] bg-white p-6 rounded-lg border border-gray-200 shadow-inner">
+                        <div class="flex justify-between items-center text-xs text-gray-400 border-b pb-2 mb-4">
+                            <span class="font-bold text-gray-700 uppercase tracking-wider">Workflow BPMN 2.0 - Réservation Voyagia</span>
+                            <span>Front Office / Back Office / Partenaires</span>
+                        </div>
+                        
+                        <!-- Structured BPMN Swimlanes Representation -->
+                        <div class="space-y-4">
+                            <!-- Swimlane 1: Espace Client / Front Office -->
+                            <div class="border border-gray-300 rounded-lg p-4 bg-gray-50 relative">
+                                <span class="absolute -left-3 top-4 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded rotate-[-90deg]">Client</span>
+                                <div class="flex items-center justify-between text-xs font-medium gap-2 text-gray-700 pl-4">
+                                    <div class="flex items-center gap-2 bg-white p-2 rounded border shadow-sm">
+                                        <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+                                        <span>Accès Section "Restaurant"</span>
+                                    </div>
+                                    <span class="text-gray-400">➔</span>
+                                    <div class="bg-white p-2 rounded border shadow-sm">Recherche critères (Cuisine, distance)</div>
+                                    <span class="text-gray-400">➔</span>
+                                    <div class="bg-red-50 border border-red-200 text-red-700 p-2 rounded shadow-sm font-semibold">Choix Taxi & Offres</div>
+                                    <span class="text-gray-400">➔</span>
+                                    <div class="bg-white p-2 rounded border shadow-sm">Confirmation & Code Réservation</div>
+                                    <span class="text-gray-400">➔</span>
+                                    <div class="flex items-center gap-2 bg-white p-2 rounded border shadow-sm">
+                                        <span class="w-3 h-3 rounded-full bg-red-600 inline-block"></span>
+                                        <span>Fin / Validation</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Swimlane 2: Back Office & Synergie Systems -->
+                            <div class="border border-gray-300 rounded-lg p-4 bg-gray-100 relative">
+                                <span class="absolute -left-3 top-4 bg-gray-700 text-white text-[10px] font-bold px-2 py-0.5 rounded rotate-[-90deg]">BackOffice</span>
+                                <div class="flex items-center justify-around text-xs font-medium text-gray-700 pl-4">
+                                    <div class="bg-white p-2 rounded border border-red-300 text-red-600 font-bold">⚠️ Échec synchro legacy (1990)</div>
+                                    <span class="text-red-400 font-mono">--- TIMEOUT ---</span>
+                                    <div class="bg-white p-2 rounded border shadow-sm">Vérification disponibilité réelle de l'offre</div>
+                                    <span class="text-gray-400">➔</span>
+                                    <div class="bg-red-100 text-red-800 p-2 rounded border border-red-300 font-semibold">Afficher "Aucune offre disponible"</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- BPMN Image Footer Note -->
+                        <div class="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center text-[11px] text-gray-500">
+                            <span>Symptôme détecté : Blocage de synchronisation et temps d'attente > 1 jour ouvré.</span>
+                            <span class="text-red-600 font-bold">Document de référence : Capture BPMN Orion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-xs text-gray-500 italic leading-relaxed">
+                * Note d'analyse : Le diagramme ci-dessus illustre la complexité du parcours utilisateur avec des dépendances synchrones non résolues entre l'application web/mobile, les taxis partenaires et le Back-Office legacy.
+            </p>
+        </section>
+
+        <!-- Gantt Planning Section -->
+        <section id="gantt" class="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 bg-red-100 text-red-600 rounded-xl">
+                        <i data-lucide="calendar" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">Planning & Gestion de Projet (Gantt Initial vs Réel)</h3>
+                        <p class="text-xs text-gray-500">Calendrier d'exécution du projet Orion (Janvier 2021 - Juin 2022)</p>
+                    </div>
+                </div>
+                <button onclick="openModal('gantt-modal')" class="inline-flex items-center space-x-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition shadow-sm">
+                    <i data-lucide="maximize-2" class="w-4 h-4"></i>
+                    <span>Agrandir le Gantt</span>
+                </button>
+            </div>
+
+            <!-- Gantt Visual Container -->
+            <div class="bg-gray-50 rounded-xl border border-gray-200 p-4 overflow-hidden cursor-pointer group" onclick="openModal('gantt-modal')">
+                <div class="overflow-x-auto">
+                    <div class="min-w-[850px] bg-white p-5 rounded-lg border border-gray-200">
+                        <!-- Gantt Header Timeline -->
+                        <div class="grid grid-cols-12 gap-1 text-[11px] font-bold text-gray-600 border-b border-gray-200 pb-2 mb-3 text-center">
+                            <div class="col-span-3 text-left pl-2">Activité / Phase</div>
+                            <div class="col-span-4 bg-gray-100 rounded py-1">2021 (S1 - S2)</div>
+                            <div class="col-span-5 bg-red-50 text-red-700 rounded py-1">2022 (S1 - S2)</div>
+                        </div>
+
+                        <!-- Gantt Rows -->
+                        <div class="space-y-2 text-xs font-medium">
+                            <!-- Phase 1 -->
+                            <div class="grid grid-cols-12 items-center py-1 border-b border-gray-100">
+                                <div class="col-span-3 text-gray-800 font-bold flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-sm bg-yellow-700"></span> Conception & Architecture
+                                </div>
+                                <div class="col-span-9 relative h-6 bg-gray-100 rounded overflow-hidden">
+                                    <div class="absolute left-0 w-1/4 h-full bg-yellow-700 text-white text-[10px] flex items-center justify-center font-bold">Jan - Mar 2021</div>
+                                </div>
+                            </div>
+
+                            <!-- Phase 2 -->
+                            <div class="grid grid-cols-12 items-center py-1 border-b border-gray-100">
+                                <div class="col-span-3 text-gray-800 font-bold flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-sm bg-emerald-700"></span> Étude et Charge
+                                </div>
+                                <div class="col-span-9 relative h-6 bg-gray-100 rounded overflow-hidden">
+                                    <div class="absolute left-[20%] w-[30%] h-full bg-emerald-700 text-white text-[10px] flex items-center justify-center font-bold">Avr - Jul 2021</div>
+                                </div>
+                            </div>
+
+                            <!-- Phase 3 -->
+                            <div class="grid grid-cols-12 items-center py-1 border-b border-gray-100">
+                                <div class="col-span-3 text-gray-800 font-bold flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-sm bg-lime-500"></span> Développement
+                                </div>
+                                <div class="col-span-9 relative h-6 bg-gray-100 rounded overflow-hidden">
+                                    <div class="absolute left-[40%] w-[40%] h-full bg-lime-500 text-gray-900 text-[10px] flex items-center justify-center font-bold">Jul - Déc 2021</div>
+                                </div>
+                            </div>
+
+                            <!-- Phase 4 -->
+                            <div class="grid grid-cols-12 items-center py-1 border-b border-gray-100">
+                                <div class="col-span-3 text-gray-800 font-bold flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-sm bg-yellow-300"></span> Intégration & Test
+                                </div>
+                                <div class="col-span-9 relative h-6 bg-gray-100 rounded overflow-hidden">
+                                    <div class="absolute left-[65%] w-[30%] h-full bg-yellow-300 text-gray-900 text-[10px] flex items-center justify-center font-bold">Jan - Mai 2022</div>
+                                </div>
+                            </div>
+
+                            <!-- Phase 5 -->
+                            <div class="grid grid-cols-12 items-center py-1">
+                                <div class="col-span-3 text-gray-800 font-bold flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-sm bg-gray-400"></span> Formation & Déploiement
+                                </div>
+                                <div class="col-span-9 relative h-6 bg-gray-100 rounded overflow-hidden">
+                                    <div class="absolute left-[80%] w-[15%] h-full bg-red-600 text-white text-[10px] flex items-center justify-center font-bold">Juin 2022 (72h)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-gray-200 flex flex-wrap justify-between items-center text-[11px] text-gray-500">
+                            <span class="flex items-center gap-2">
+                                <span class="inline-block w-3 h-3 bg-red-600 rounded"></span> Dérive observée : Maintien du Cycle en V rigide sans ajustement des délais.
+                            </span>
+                            <span class="font-bold text-gray-700">Project Orion Timeline</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diagnostic & Causes Racines -->
+        <section id="causes" class="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+            <div class="flex items-center space-x-3 border-b border-gray-100 pb-4">
+                <div class="p-2 bg-red-100 text-red-600 rounded-xl">
+                    <i data-lucide="file-search" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900">Matrice Diagnostic des Causes Racines</h3>
+                    <p class="text-xs text-gray-500">Évaluation des dysfonctionnements majeurs par dimension projet</p>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 border-b border-gray-200 text-xs font-bold text-gray-600 uppercase tracking-wider">
+                            <th class="py-3.5 px-4">Dimension</th>
+                            <th class="py-3.5 px-4">Erreur Méthodologique Constatée</th>
+                            <th class="py-3.5 px-4">Impact Constaté</th>
+                            <th class="py-3.5 px-4">Niveau de Risque</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 text-sm font-medium">
+                        <tr class="hover:bg-red-50/30 transition">
+                            <td class="py-4 px-4 text-red-700 font-bold flex items-center gap-2">
+                                <i data-lucide="shield-alert" class="w-4 h-4 text-red-600"></i> Gouvernance
+                            </td>
+                            <td class="py-4 px-4 text-gray-800">Scope creep continu sans ajustement du budget ou des délais.</td>
+                            <td class="py-4 px-4 text-gray-600">Budget x3 (15 M€)</td>
+                            <td class="py-4 px-4">
+                                <span class="px-3 py-1 text-xs font-bold rounded-full bg-red-100 text-red-700 border border-red-200">
+                                    Critique
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-red-50/30 transition">
+                            <td class="py-4 px-4 text-red-700 font-bold flex items-center gap-2">
+                                <i data-lucide="cpu" class="w-4 h-4 text-red-600"></i> Technique
+                            </td>
+                            <td class="py-4 px-4 text-gray-800">Absence de Proof of Concept (POC) sur l'intégration legacy 1990.</td>
+                            <td class="py-4 px-4 text-gray-600">Bugs critiques en PROD & Instabilité</td>
+                            <td class="py-4 px-4">
+                                <span class="px-3 py-1 text-xs font-bold rounded-full bg-red-100 text-red-700 border border-red-200">
+                                    Critique
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-red-50/30 transition">
+                            <td class="py-4 px-4 text-red-700 font-bold flex items-center gap-2">
+                                <i data-lucide="kanban" class="w-4 h-4 text-red-600"></i> Gestion Projet
+                            </td>
+                            <td class="py-4 px-4 text-gray-800">Maintien d'un Cycle en V rigide malgré les dérives répétées.</td>
+                            <td class="py-4 px-4 text-gray-600">+24 mois de retard cumulé</td>
+                            <td class="py-4 px-4">
+                                <span class="px-3 py-1 text-xs font-bold rounded-full bg-orange-100 text-orange-700 border border-orange-200">
+                                    Élevé
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-red-50/30 transition">
+                            <td class="py-4 px-4 text-red-700 font-bold flex items-center gap-2">
+                                <i data-lucide="user-x" class="w-4 h-4 text-red-600"></i> Humain / UX
+                            </td>
+                            <td class="py-4 px-4 text-gray-800">Conseillers clients non consultés lors du design des interfaces.</td>
+                            <td class="py-4 px-4 text-gray-600">Rejet utilisateur à 90%</td>
+                            <td class="py-4 px-4">
+                                <span class="px-3 py-1 text-xs font-bold rounded-full bg-orange-100 text-orange-700 border border-orange-200">
+                                    Élevé
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Architecture Section (Constat vs Cible) -->
+        <section id="architecture" class="space-y-6">
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-red-100 text-red-600 rounded-xl">
+                    <i data-lucide="network" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900">Architecture Cible vs Architecture Constatée</h3>
+                    <p class="text-xs text-gray-500">Du monolithe instable vers un système découplé sécurisé</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Architecture Constatée (Échec) -->
+                <div class="bg-white border border-red-200 rounded-2xl p-6 shadow-sm relative">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
+                        <h4 class="font-bold text-red-600 flex items-center gap-2 text-base">
+                            <i data-lucide="x-circle" class="w-5 h-5"></i>
+                            Architecture Constatée (Projet Orion)
+                        </h4>
+                        <span class="text-xs bg-red-100 text-red-700 border border-red-200 px-2.5 py-1 rounded-full font-bold">Monolithe Fragile</span>
+                    </div>
+                    
+                    <div class="space-y-3 py-2">
+                        <div class="p-3 bg-red-50/50 rounded-xl border border-red-200 text-xs font-medium text-gray-800 flex justify-between items-center">
+                            <span>Briques Legacy (1990)</span>
+                            <span class="text-red-600 font-bold text-xs">❌ Échec Synchro</span>
+                        </div>
+                        <div class="text-center text-xs text-gray-400 font-mono">⬇️ Absence d'API Gateway / POC</div>
+                        <div class="p-4 bg-red-600 text-white rounded-xl text-center shadow-sm">
+                            <span class="font-bold text-sm block">Plateforme Orion (Monolithe)</span>
+                            <span class="text-xs text-red-100">Couplage fort & Instabilité globale</span>
+                        </div>
+                        <div class="text-center text-xs text-gray-400 font-mono">⬇️ Impacts Utilisateurs</div>
+                        <div class="p-3 bg-gray-50 rounded-xl border border-gray-200 text-xs text-gray-600 space-y-1">
+                            <p>• Réservations doublées</p>
+                            <p>• Échecs de paiement systématiques</p>
+                            <p>• Rejet massif des conseillers métiers</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Architecture Cible (Recommandée) -->
+                <div class="bg-white border border-emerald-200 rounded-2xl p-6 shadow-sm relative">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
+                        <h4 class="font-bold text-emerald-700 flex items-center gap-2 text-base">
+                            <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                            Architecture Cible Recommandée
+                        </h4>
+                        <span class="text-xs bg-emerald-100 text-emerald-800 border border-emerald-200 px-2.5 py-1 rounded-full font-bold">Microservices & APIs</span>
+                    </div>
+
+                    <div class="space-y-3 py-2">
+                        <div class="p-3 bg-gray-50 rounded-xl border border-gray-200 text-xs font-semibold text-gray-700">
+                            Core Legacy (1990) + GDS Partenaires
+                        </div>
+                        <div class="text-center text-xs text-emerald-600 font-mono font-bold">⬇️ Protection & Découplage</div>
+                        <div class="p-3 bg-red-600 text-white rounded-xl text-center font-bold text-xs shadow-sm">
+                            API Gateway Centralisée (Zone d'Abstraction)
+                        </div>
+                        <div class="text-center text-xs text-emerald-600 font-mono font-bold">⬇️ Microservices Indépendants</div>
+                        <div class="grid grid-cols-3 gap-2 text-center text-xs font-bold">
+                            <div class="p-2.5 bg-emerald-50 text-emerald-800 rounded-lg border border-emerald-200">Vol</div>
+                            <div class="p-2.5 bg-emerald-50 text-emerald-800 rounded-lg border border-emerald-200">Hôtel</div>
+                            <div class="p-2.5 bg-emerald-50 text-emerald-800 rounded-lg border border-emerald-200">Restauration</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KPIs Target Section -->
+        <section id="kpis" class="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+            <div class="flex items-center space-x-3 border-b border-gray-100 pb-4">
+                <div class="p-2 bg-red-100 text-red-600 rounded-xl">
+                    <i data-lucide="target" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900">Cibles de Performance pour le Nouveau SI (KPIs)</h3>
+                    <p class="text-xs text-gray-500">Objectifs mesurables de rétablissement de la qualité de service</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="p-5 bg-red-50/40 rounded-xl border border-red-100">
+                    <span class="text-xs font-bold text-gray-500 block mb-1">Temps de Chargement</span>
+                    <div class="text-xs font-bold text-red-600 line-through">Avant : > 8 sec</div>
+                    <div class="text-2xl font-black text-gray-900 mt-1">&lt; 3 sec</div>
+                    <span class="mt-2 inline-block text-[11px] font-bold px-2.5 py-0.5 rounded bg-red-100 text-red-700 border border-red-200">Prioritaire</span>
+                </div>
+
+                <div class="p-5 bg-red-50/40 rounded-xl border border-red-100">
+                    <span class="text-xs font-bold text-gray-500 block mb-1">Taux d'Erreur Technique</span>
+                    <div class="text-xs font-bold text-red-600 line-through">Avant : > 12%</div>
+                    <div class="text-2xl font-black text-gray-900 mt-1">&lt; 1%</div>
+                    <span class="mt-2 inline-block text-[11px] font-bold px-2.5 py-0.5 rounded bg-red-100 text-red-700 border border-red-200">Critique</span>
+                </div>
+
+                <div class="p-5 bg-red-50/40 rounded-xl border border-red-100">
+                    <span class="text-xs font-bold text-gray-500 block mb-1">Parcours Annulation</span>
+                    <div class="text-xs font-bold text-red-600 line-through">Avant : 12 clics</div>
+                    <div class="text-2xl font-black text-gray-900 mt-1">3 clics max</div>
+                    <span class="mt-2 inline-block text-[11px] font-bold px-2.5 py-0.5 rounded bg-red-100 text-red-700 border border-red-200">UX Target</span>
+                </div>
+
+                <div class="p-5 bg-red-50/40 rounded-xl border border-red-100">
+                    <span class="text-xs font-bold text-gray-500 block mb-1">Satisfaction Client (NPS)</span>
+                    <div class="text-xs font-bold text-red-600 line-through">Avant : -35</div>
+                    <div class="text-2xl font-black text-gray-900 mt-1">&gt; +40</div>
+                    <span class="mt-2 inline-block text-[11px] font-bold px-2.5 py-0.5 rounded bg-red-100 text-red-700 border border-red-200">Objectif Métier</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap Corrective -->
+        <section id="roadmap" class="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+            <div class="flex items-center space-x-3 border-b border-gray-100 pb-4">
+                <div class="p-2 bg-red-100 text-red-600 rounded-xl">
+                    <i data-lucide="map-pin" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900">Feuille de Route Corrective & Post-Mortem</h3>
+                    <p class="text-xs text-gray-500">Plan de redressement stratégique recommandé par la MOA</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Action 1 -->
+                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-200 space-y-3 relative">
+                    <div class="flex items-center space-x-3">
+                        <span class="w-8 h-8 rounded-xl bg-red-600 text-white flex items-center justify-center text-sm font-black shadow-sm">1</span>
+                        <h4 class="font-bold text-gray-900 text-base">Passage à l'Agilité Hybride</h4>
+                    </div>
+                    <ul class="text-sm text-gray-700 space-y-2 pl-2">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-red-600 mt-1 flex-shrink-0"></i>
+                            <span>Adopter la méthodologie <strong>Scrum / Kanban</strong> avec des sprints de 2 à 3 semaines.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-red-600 mt-1 flex-shrink-0"></i>
+                            <span>Valider chaque brique technique via des <strong>Proof of Concepts (POC)</strong> systématiques.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-red-600 mt-1 flex-shrink-0"></i>
+                            <span>Co-concevoir et tester les prototypes UX directement avec les conseillers métiers.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Action 2 -->
+                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-200 space-y-3 relative">
+                    <div class="flex items-center space-x-3">
+                        <span class="w-8 h-8 rounded-xl bg-red-600 text-white flex items-center justify-center text-sm font-black shadow-sm">2</span>
+                        <h4 class="font-bold text-gray-900 text-base">Architecture Découplée (APIs)</h4>
+                    </div>
+                    <ul class="text-sm text-gray-700 space-y-2 pl-2">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-red-600 mt-1 flex-shrink-0"></i>
+                            <span>Mettre en place une <strong>API Gateway</strong> pour isoler le système legacy des années 90.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-red-600 mt-1 flex-shrink-0"></i>
+                            <span>Développer des <strong>microservices indépendants</strong> (Vol, Hôtel, Restauration).</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-red-600 mt-1 flex-shrink-0"></i>
+                            <span>Centraliser les données dans un <strong>Data Hub unique</strong> conforme RGPD.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- BPMN Modal -->
+    <div id="bpmn-modal" class="fixed inset-0 modal-bg z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-5xl w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto shadow-2xl relative">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-lg text-gray-900">Diagramme BPMN Détaillé - Processus Métier</h3>
+                <button onclick="closeModal('bpmn-modal')" class="p-2 text-gray-500 hover:text-red-600 rounded-lg">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="bg-gray-100 p-4 rounded-xl border text-center">
+                <p class="text-xs text-gray-500 mb-3">Vue détaillée de la chaîne d'appels Front Office ➔ Back Office ➔ Restaurants / Taxis partenaires</p>
+                <!-- Large BPMN Placeholder representation -->
+                <div class="bg-white p-6 rounded-lg border text-left shadow-inner space-y-4">
+                    <div class="font-mono text-xs text-red-600 font-bold border-b pb-2">BPMN FULL DIAGRAM - VOYAGIA PROJET ORION</div>
+                    <div class="p-4 bg-gray-50 rounded border space-y-2 text-xs">
+                        <div class="font-bold text-gray-800">Éléments Clés Identifiés :</div>
+                        <p>1. <strong>Front Office :</strong> Filtre des critères (Cuisine, Distance) ➔ Choix du Taxi ➔ Sélection de l'offre.</p>
+                        <p>2. <strong>Back Office :</strong> Vérification de la disponibilité réelle ➔ <em>Échec de synchronisation récurrent avec Legacy 1990</em>.</p>
+                        <p>3. <strong>Partenaires :</strong> Confirmation ou délai > 1 jour ouvré déclenchant l'annulation automatique.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gantt Modal -->
+    <div id="gantt-modal" class="fixed inset-0 modal-bg z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-5xl w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto shadow-2xl relative">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-lg text-gray-900">Planning Gantt Complet - Chronologie Projet Orion</h3>
+                <button onclick="closeModal('gantt-modal')" class="p-2 text-gray-500 hover:text-red-600 rounded-lg">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="bg-gray-100 p-4 rounded-xl border text-center">
+                <p class="text-xs text-gray-500 mb-3">Phases : Conception, Étude & Charge, Développement, Intégration Test, Formation & Déploiement</p>
+                <div class="bg-white p-6 rounded-lg border text-left shadow-inner space-y-3 font-mono text-xs">
+                    <p class="font-bold text-gray-800">Bilan Temporel du Projet :</p>
+                    <p class="text-gray-600">• Jan 2021 - Mar 2021 : Conception & Architecture (3 mois en chambre)</p>
+                    <p class="text-gray-600">• Avr 2021 - Jul 2021 : Étude et Charge</p>
+                    <p class="text-gray-600">• Jul 2021 - Déc 2021 : Développement Monolithe</p>
+                    <p class="text-gray-600">• Jan 2022 - Mai 2022 : Intégration & Tests (Instabilité récurrente)</p>
+                    <p class="text-red-600 font-bold">• Juin 2022 : Déploiement PROD -> Retrait après 72 heures</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 py-6 bg-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-500 space-y-1">
+            <p class="font-semibold text-gray-700">Portfolio Case Study • Audit SI Voyagia S.A. • Projet Orion</p>
+            <p>Équipe Projet :Cedric KOUASSI | IMT Business School</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
